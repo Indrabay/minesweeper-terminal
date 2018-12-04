@@ -10,13 +10,6 @@ const NEIGHBOR = [
   { row: 0, col: -1 },
 ]
 
-const TILE_STATUS = {
-  1: "passed",
-  2: "opened",
-  3: "out of bond",
-  4: "lose"
-}
-
 function initBoard(length, width) {
   let board = []
   for (let i = 0; i < length; i++) {
@@ -52,11 +45,11 @@ function initBomb(board, bombs) {
 
 function checkTile(board, row, col, isLoop = false) {
   if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
-    return isLoop ? 3 : console.log("di luar papan")
+    return isLoop ? 1 : console.log("di luar papan")
   }
 
   if (board[row][col].isOpen === true) {
-    return isLoop ? 2 : console.log("sudah dibuka")
+    return isLoop ? 1 : console.log("sudah dibuka")
   }
 
   if (board[row][col].isBomb === true) {
@@ -167,4 +160,5 @@ function main() {
   }
 }
 
-main()
+let app = { initBoard, initBomb, checkInitBoard, checkInitBomb, countOpened, main }
+module.exports = app

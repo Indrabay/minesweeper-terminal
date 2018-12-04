@@ -6,6 +6,7 @@
   "author": "Indra Bayu <indra.b@skyshi.com>",
   "license": "MIT",
   "dependencies": {
+    "jest": "^23.6.0",
     "readline-sync": "^1.4.9"
   }
 }
