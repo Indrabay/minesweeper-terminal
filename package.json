@@ -1,0 +1,11 @@
+{
+  "name": "terminal-mines",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Indrabay/minesweeper-terminal.git",
+  "author": "Indra Bayu <indra.b@skyshi.com>",
+  "license": "MIT",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  }
+}
