@@ -87,7 +87,7 @@ function checkInitBomb(board, bombs) {
   return board.length * board[0].length - 2 >= bombs
 }
 
-function printBoard(board) {
+function printBoard(board, cheat = false) {
   let stringToPrint = "$".padEnd(3, " ")
   for (let i = 0; i < board[0].length; i++) {
     stringToPrint += `${i + 1}`.padEnd(3, " ")
@@ -96,7 +96,7 @@ function printBoard(board) {
   for (let i = 0; i < board.length; i++) {
     stringToPrint += `${i + 1}`.padEnd(3, " ")
     for (let j = 0; j < board[0].length; j++) {
-      stringToPrint += `${board[i][j].showBoard}`.padEnd(3, " ")
+      stringToPrint += cheat === true ? `${board[i][j].showCheat}`.padEnd(3, " ") : `${board[i][j].showBoard}`.padEnd(3, " ")
     }
     stringToPrint += "\n"
   }
@@ -145,16 +145,20 @@ function main() {
   while (notEnd) {
     printBoard(board)
     let coordinat = readline.question("Masukkan koordinat baris,colom: ")
-    coordinat = coordinat.split(",")
-    let statusTile = checkTile(board, Number(coordinat[0]), Number(coordinat[1]))
-    if (statusTile === 4) {
-      notEnd = false
-      console.log("kalah")
-    } else if (statusTile === 1) {
-      let openedTile = countOpened(board)
-      if (board.length * board[0].length - openedTile === bombs) {
+    if (coordinat.toLowerCase() === "cheat") {
+      printBoard(board, true)
+    } else {
+      coordinat = coordinat.split(",")
+      let statusTile = checkTile(board, Number(coordinat[0]) - 1, Number(coordinat[1]) - 1)
+      if (statusTile === 4) {
         notEnd = false
-        console.log("menang")
+        console.log("kalah")
+      } else if (statusTile === 1) {
+        let openedTile = countOpened(board)
+        if (board.length * board[0].length - openedTile === bombs) {
+          notEnd = false
+          console.log("menang")
+        }
       }
     }
   }

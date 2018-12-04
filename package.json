@@ -8,5 +8,8 @@
   "dependencies": {
     "jest": "^23.6.0",
     "readline-sync": "^1.4.9"
+  },
+  "script": {
+    
   }
 }
