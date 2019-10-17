@@ -88,6 +88,7 @@ function checkInitBomb(board, bombs) {
 }
 
 function printBoard(board, cheat = false) {
+  let ListBomb = []
   let stringToPrint = "$".padEnd(3, " ")
   for (let i = 0; i < board[0].length; i++) {
     stringToPrint += `${i + 1}`.padEnd(3, " ")
@@ -97,11 +98,13 @@ function printBoard(board, cheat = false) {
     stringToPrint += `${i + 1}`.padEnd(3, " ")
     for (let j = 0; j < board[0].length; j++) {
       stringToPrint += cheat === true ? `${board[i][j].showCheat}`.padEnd(3, " ") : `${board[i][j].showBoard}`.padEnd(3, " ")
+      if (board[i][j].isBomb === true) {ListBomb.push((i+1)+","+(j+1))}
     }
     stringToPrint += "\n"
   }
 
   console.log(stringToPrint)
+  if (cheat === true) {console.log(ListBomb)}
 }
 
 function countOpened(board) {
@@ -152,12 +155,12 @@ function main() {
       let statusTile = checkTile(board, Number(coordinat[0]) - 1, Number(coordinat[1]) - 1)
       if (statusTile === 4) {
         notEnd = false
-        console.log("kalah")
+        console.log("Kamu kalah, sailahkan coba kembali dengan command node server.js")
       } else if (statusTile === 1) {
         let openedTile = countOpened(board)
         if (board.length * board[0].length - openedTile === bombs) {
           notEnd = false
-          console.log("menang")
+          console.log("Kamu berhasil, mau main lagi?")
         }
       }
     }
